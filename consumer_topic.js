@@ -1,4 +1,6 @@
 const amqp = require("amqplib/callback_api");
+const yargs = require("yargs/yargs");
+const { hideBin } = require("yargs/helpers");
 
 const argv = yargs(hideBin(process.argv)).argv;
 
@@ -31,9 +33,11 @@ amqp.connect(url, (error0, connection) => {
     });
 
     channel.assertQueue(
-      "",
+      "bola",
       {
-        exclusive: true,
+        arguments: {
+          "x-single-active-consumer": true,
+        },
       },
       (error2, q) => {
         if (error2) {

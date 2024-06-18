@@ -30,7 +30,7 @@ amqp.connect(url, (error0, connection) => {
 
     channel.assertExchange(exchange, "topic", { durable: false });
 
-    channel.publish(exchange, routingKey, Buffer.from(msg), { expiration });
+    channel.publish(exchange, routingKey, Buffer.from(msg));
     console.log(" [x] Sent %s: '%s'", routingKey, msg);
   });
 
